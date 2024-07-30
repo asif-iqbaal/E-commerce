@@ -75,7 +75,11 @@ function Home(){
       <div className="w-screen  flex flex-col bg-gradient-to-b from-white to-gray-100 "  >
       <div
      
-      className="flex justify-center items-center  " data-aos="zoom-out-down"    >
+      className="
+      bg-[url('https://png.pngtree.com/background/20211216/original/pngtree-shopping-in-the-morning-picture-image_1522971.jpg')]
+      bg-cover bg-center 
+      flex justify-center items-center h-[90vh] " data-aos="zoom-out-down" 
+         >
           <div className="w-1/3 h-full flex flex-col justify-center items-center">
           <div className="flex flex-col justify-center items-center">
             <img src="https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/steam-64.png" alt="image"
@@ -90,7 +94,7 @@ function Home(){
               <button className="bg-purple-600 text-white p-4 rounded-full m-2">Learn more</button>
           </div>
           <div className="w-2/3 h-full flex m-4  ">
-              <img src="https://png.pngtree.com/background/20211216/original/pngtree-shopping-in-the-morning-picture-image_1522971.jpg" alt="image" className="h-full w-full rounded-full "/>
+              {/* <img src="https://png.pngtree.com/background/20211216/original/pngtree-shopping-in-the-morning-picture-image_1522971.jpg" alt="image" className="h-full w-full rounded-full "/> */}
           </div>
           
       </div>
