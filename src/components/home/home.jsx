@@ -1,5 +1,6 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import Api from '../../api/api'
+import Api2 from '../../api/api2.json'
 import shopImage from './shopImage.jpg'
 import Card from "../card/card";
 import {useNavigate} from 'react-router-dom'
@@ -12,6 +13,7 @@ import Loading from "../Loading/Loading";
 function Home(){
 
     const [shoping,setShoping] = useState([]);
+    const [shop,setShop] =useState([]);
     const [isLoading,setIsLoading] =useState(true);
     //const shoping = Api();
     const navigate = useNavigate();
@@ -28,6 +30,15 @@ function Home(){
     accountDetails();
     },[])
  
+    const style = {
+      backgroundImage: 'url(https://media.istockphoto.com/id/1257563298/photo/fashion-clothes-on-a-rack-in-a-light-background-indoors-place-for-text.webp?b=1&s=170667a&w=0&k=20&c=6wi1NI8r8eh0fLP_UjzUVcpmYuwn1mvwgchlyoia92E=)',
+      backgroundSize: 'cover',
+      height: '50vh',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      
+    };
+
     const data = Api();
   useEffect(() => {
     AOS.init({
@@ -36,11 +47,14 @@ function Home(){
       easing: 'ease-in-out',
       once: true, // Whether animation should happen only once - while scrolling down
     }); 
+
+    
   }, []);
 
   useEffect(() =>{
-  if(data){
+  if(data && Api2){
     setShoping(data);
+    setShop(Api2)
     setIsLoading(false);
   }
 } 
@@ -58,23 +72,33 @@ function Home(){
         <Loading />
       </div>
     ):(
-      <div className="w-screen  flex flex-col ">
-      <div className="flex h-1/3  bg-slate-100">
-          <div className="w-1/2 h-96 flex justify-center items-center">
-              <p className="w-2/3 h-full flex justify-center items-center font-serif text-4xl text-slate-800 stroke-gray-300">Shopping With You Joy <br/>
-              In Smart Way Choose your best <br/>
+      <div className="w-screen  flex flex-col bg-gradient-to-b from-white to-gray-100 "  >
+      <div
+     
+      className="flex justify-center items-center  " data-aos="zoom-out-down"    >
+          <div className="w-1/3 h-full flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center">
+            <img src="https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/steam-64.png" alt="image"
+            className="rounded-full" />
+            <p className="pt-3">We give you that what you need</p>
+          </div>
+              <p className="w-2/3 h-1/2 flex flex-col justify-center items-center font-serif text-4xl text-slate-800">
+             <p className="text-orange-500 text-6xl"> Shopping With You</p> Joy
+            In Smart Way Choose your best <br/>
               Care your Best 
               </p>
+              <button className="bg-purple-600 text-white p-4 rounded-full m-2">Learn more</button>
           </div>
-          <div className="w-1/2 h-full flex  m-2">
-              <img src={shopImage} alt="image" className="h-full w-full shadow-lg shadow-blue-200 m-2 "/>
+          <div className="w-2/3 h-full flex m-4  ">
+              <img src="https://png.pngtree.com/background/20211216/original/pngtree-shopping-in-the-morning-picture-image_1522971.jpg" alt="image" className="h-full w-full rounded-full "/>
           </div>
+          
       </div>
       {/*                                     cards Data                                 */}
-      <div className="flex flex-wrap w-screen gap-1 justify-center items-center bg-slate-50 overflow-hidden
+      <div className="flex flex-wrap w-screen gap-1 justify-center items-center  overflow-hidden px-40
       ">
           {shoping && shoping.length > 0 && shoping.map((item,index)=>(
-         <button className="shadow-lg shadow-blue-200 m-2 "  data-aos="fade-up"data-aos-duration="600"  key={index} onClick={() => handleCardClick(item)}>
+         <button className="shadow-lg shadow-gray-400 m-4 " data-aos-once="false"  data-aos="fade-up"data-aos-duration="600"  key={index} onClick={() => handleCardClick(item)}>
            <Card 
            key={index}
           Image={item.image}
@@ -83,7 +107,25 @@ function Home(){
           price={item.price}/>
          </button>
 
-      ))}</div>
+      ))}
+  <div className="w-screen h-auto m-2  text-center flex justify-center items-center rounded-full" data-aos="slide-up"
+  style={style}
+  >
+    <h2 className="text-5xl font-mono font-bold text-gray-800">Our Special Product</h2>
+  </div>
+
+        {shop && shop.length > 0 && shop.map((item,index)=>(
+         <button className="shadow-lg shadow-gray-400  m-2 "data-aos-once="false"  data-aos="fade-up"data-aos-duration="1000"  key={index} onClick={() => handleCardClick(item)}>
+           <Card 
+           key={index}
+          Image={item.image}
+          Name={item.title}
+          Description={item.description}
+          price={item.price}/>
+         </button>
+
+      ))}
+      </div>
   </div>
 
     )}

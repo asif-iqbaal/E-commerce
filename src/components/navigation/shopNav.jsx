@@ -1,6 +1,8 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Menu, X } from 'lucide-react'
 import { Link } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 function ShopNav(){
     const navItems = [
         {
@@ -20,9 +22,18 @@ function ShopNav(){
             to:"/electronics"
         }
     ]
+
+    useEffect(() => {
+      AOS.init({
+        duration: 1200,
+        offset: 200,
+        easing: 'ease-in-out',
+        once: true, // Whether animation should happen only once - while scrolling down
+      });
+    }, []);
     return(
         
-         <div className="relative w-screen bg-slate-50  overflow-hidden">
+         <div className="relative w-screen   overflow-hidden">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         {/* <div className="inline-flex items-center space-x-2">
           <span>
@@ -41,13 +52,17 @@ function ShopNav(){
           </span>
           <span className="font-bold">DevUI</span>
         </div> */}
-        <div className="hidden lg:block">
+        <div className="hidden lg:block" >
           <ul className="inline-flex space-x-8">
             {navItems.map((item) => (
-              <li key={item.name}>
+              <li key={item.name}
+              data-aos="slide-left" 
+              data-aos-offset="120"
+              data-aos-duration="1000">
                 <Link
                 to={item.to}
-                  className="text-sm font-semibold text-gray-800 hover:text-orange-600 transition-colors"
+                 
+                className="text-sm font-semibold text-gray-800 hover:text-orange-600 transition-colors"
                 >
                   {item.name}
                 </Link>

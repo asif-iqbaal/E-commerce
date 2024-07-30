@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import Card from "../card/card";
 import { useNavigate } from "react-router-dom";
 import Api from '../../api/api'
+import Api2 from '../../api/api2.json'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import shopImage from './jewelerry.jpg'
@@ -11,6 +12,7 @@ import Loading from "../Loading/Loading";
 export default function Jewelery(){
     const [isLoading,SetIsLoading] =useState(true)
     const [shopping,SetShopping] = useState([]);
+    const [shop,setShop] =useState([]);
     const data = Api();
     const navigate = useNavigate();
 
@@ -24,8 +26,9 @@ export default function Jewelery(){
             easing: 'ease-in-out',
             once:true,
         });
-        if(data){
+        if(data && Api2){
             SetShopping(data);
+            setShop(Api2);
             SetIsLoading(false)
         }
       },[data])
@@ -65,6 +68,19 @@ export default function Jewelery(){
            ) : null
 
         ))}
+         {shop && shop.length > 0 && shop.map((item,index)=>(
+        item.category === "jewelry" ? (
+          <button className="shadow-lg shadow-blue-200 m-1" data-aos="fade-up"data-aos-duration="600"  key={index} onClick={() => handleCardClick(item)}>
+           <Card 
+           key={index}
+          Image={item.image}
+          Name={item.title}
+          Description={item.description}
+          price={item.price}/>
+         </button>
+         ) : null
+
+      ))}
         </div>
         </div>
         )}

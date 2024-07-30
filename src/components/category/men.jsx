@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../card/card";
 import Api from '../../api/api'
+import Api2 from '../../api/api2.json'
 import AOS from "aos";
 import shopImage from './men.jpg'
 import Loading from "../Loading/Loading";
@@ -11,6 +12,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 export default function Men(){
         const [isLoading,SetIsLoading] =useState(true)
         const [shopping,SetShopping] = useState([]);
+        const [shop,setShop] = useState([]);
         const data = Api();
         const navigate = useNavigate();
 
@@ -24,8 +26,9 @@ export default function Men(){
                 easing: 'ease-in-out',
                 once:true,
             });
-            if(data){
+            if(data && Api2){
                 SetShopping(data);
+                setShop(Api2);
                 SetIsLoading(false)
             }
           },[data])
@@ -67,6 +70,19 @@ export default function Men(){
            ) : null
 
         ))}
+        {shop && shop.length > 0 && shop.map((item,index)=>(
+        item.category === "men's clothing" ? (
+          <button className="shadow-lg shadow-blue-200 m-1" data-aos="fade-up"data-aos-duration="600"  key={index} onClick={() => handleCardClick(item)}>
+           <Card 
+           key={index}
+          Image={item.image}
+          Name={item.title}
+          Description={item.description}
+          price={item.price}/>
+         </button>
+         ) : null
+
+      ))}
         </div>
         </div>
         )}
