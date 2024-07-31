@@ -15,9 +15,14 @@ class Authentication {
 
     async signUp( email, password, name ) {
         try {
-            const response = await this.account.create(this.id, email, password, name);
-            console.log(response);
-        } catch (error) {
+            //           const session = await this.account.getSession('current');
+            //           if(session){
+            //           await this.account.deleteSession('current');
+            // }
+                    const response = await this.account.createEmailPasswordSession(email,password);
+                    console.log(response);
+                    return response;
+            } catch (error) {
             console.error("Can't sign up", error);
         }
     }
