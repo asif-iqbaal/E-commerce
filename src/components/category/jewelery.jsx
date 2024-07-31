@@ -7,6 +7,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import shopImage from './jewelerry.jpg'
 import Loading from "../Loading/Loading";
+import WaveSvg from "../home/wave";
 
 
 export default function Jewelery(){
@@ -42,16 +43,32 @@ export default function Jewelery(){
             </div>
         ):(
             <div className="w-full  flex flex-col">
-        <div className="flex h-1/3  bg-slate-100">
-          <div className="w-1/2 h-96 flex justify-center items-center">
-              <p className="w-2/3 h-full flex justify-center items-center font-serif text-4xl text-slate-800 stroke-gray-300">
-              Add a touch of sparkle to your look with our exquisite jewelry.
-              </p>
+         <div
+            className="
+      bg-[url('https://m.economictimes.com/thumb/msid-104575525,width-1600,height-900,resizemode-4,imgsize-65448/silver-jewellery-istock.jpg')]
+      bg-cover bg-center mx-20 rounded-lg
+      flex flex-col justify-center items-center  " data-aos="zoom-out-down"
+          >
+            <div className="flex w-full justify-center items-center h-[80vh]">
+              <div className="w-2/4 h-full flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center">
+                  {/* <img src="https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/steam-64.png" alt="image"
+            className="rounded-full" />
+            <p className="pt-3">We give you that what you need</p> */}
+                </div>
+                <p className="w-2/3 h-1/2 flex flex-col justify-center items-center font-serif text-4xl text-white">
+                  <p className="text-white text-5xl font-semibold"> Shopping With You
+                  </p> We provide best product <br />
+                  for fashion 
+                </p>
+                <button className="bg-purple-600 text-white p-4 rounded-full m-2">Learn more</button>
+              </div>
+             <div className="w-2/4"></div>
+            </div>
+            <div className="w-[100%] ">
+              <WaveSvg />
+            </div>
           </div>
-          <div className="w-1/2 h-full flex  m-2">
-              <img src={shopImage} alt="image" className="h-full w-full shadow-lg shadow-blue-200 m-2 "/>
-          </div>
-      </div>
         <div className="flex flex-wrap gap-1 justify-center items-center bg-slate-50
         ">
             {shopping && shopping.length > 0 && shopping.map((item,index)=>(
